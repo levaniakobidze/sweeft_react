@@ -6,7 +6,7 @@ const App = () => {
   return (
     <Fragment>
       <Routes>
-        <Route path="/" element={<Home />} />
+        <Route path="/:country" element={<Home />} />
       </Routes>
     </Fragment>
   );

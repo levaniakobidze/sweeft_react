@@ -5,12 +5,14 @@ import { MainContext } from "../../context/mainContext";
 import { ContextTypes } from "../../context/mainContext";
 import axios from "axios";
 import { countryDataTypes } from "../../types/types";
+import { useNavigate } from "react-router-dom";
 
 const SelectCountry = () => {
   const { location, setLocation, setCountry } = useContext(
     MainContext
   ) as ContextTypes;
   const [countries, setCountries] = useState([]);
+  const navigate = useNavigate();
 
   const getCountry = async (name: string) => {
     try {
@@ -26,6 +28,7 @@ const SelectCountry = () => {
         borders,
         currencies,
         continents,
+        cca3,
       } = resp.data[0];
       setCountry({
         name: resp.data[0].name,
@@ -37,6 +40,7 @@ const SelectCountry = () => {
         borders: borders,
         currencies: currencies,
         continent: continents[0],
+        cca3: cca3,
       });
     } catch (error) {
       console.log(error);
@@ -116,12 +120,18 @@ const SelectCountry = () => {
     }
   }, [location]);
 
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  const handleSelectChange = (e: any) => {
+    navigate(`/${e.name}`);
+  };
+
   return (
     <div>
       <Select
         options={countries.map((country: countryDataTypes) => {
-          return { name: country.name.common, label: country.name.common };
+          return { name: country.cca3, label: country.name.common };
         })}
+        onChange={handleSelectChange}
       />
     </div>
   );

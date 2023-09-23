@@ -8,6 +8,7 @@ export interface countryDataTypes {
   currencies: { name: string; symbol: string };
   borders: [string];
   continent: string;
+  cca3: string;
 }
 
 export interface LocationTypes {
