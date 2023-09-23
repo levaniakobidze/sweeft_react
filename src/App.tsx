@@ -1,10 +1,14 @@
+import { Fragment } from "react";
 import "./App.css";
-
+import { Routes, Route } from "react-router-dom";
+import Home from "./pages/Home/Home";
 const App = () => {
   return (
-    <>
-      <h1>Hello Sweeft</h1>
-    </>
+    <Fragment>
+      <Routes>
+        <Route path="/" element={<Home />} />
+      </Routes>
+    </Fragment>
   );
 };
 

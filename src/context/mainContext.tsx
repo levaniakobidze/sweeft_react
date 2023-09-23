@@ -5,22 +5,33 @@ import {
   Dispatch,
   SetStateAction,
 } from "react";
+import { countryDataTypes, LocationTypes } from "../types/types";
 
 interface Props {
   children: ReactNode;
 }
 
-interface ContextTypes {
-  state: boolean;
-  setState: Dispatch<SetStateAction<boolean>>;
+export interface ContextTypes {
+  location: LocationTypes;
+  setLocation: Dispatch<SetStateAction<LocationTypes>>;
+  country: countryDataTypes | null;
+  setCountry: Dispatch<SetStateAction<countryDataTypes>>;
 }
 
 export const MainContext = createContext<ContextTypes | null>(null);
 
 const ContextProvider: React.FC<Props> = ({ children }) => {
-  const [state, setState] = useState(false);
+  const [location, setLocation] = useState<LocationTypes>({
+    latitude: 0,
+    longitude: 0,
+  });
+  const [country, setCountry] = useState<countryDataTypes>(
+    {} as countryDataTypes
+  );
   return (
-    <MainContext.Provider value={{ state, setState }}>
+    <MainContext.Provider
+      value={{ location, setLocation, country, setCountry }}
+    >
       {children}
     </MainContext.Provider>
   );

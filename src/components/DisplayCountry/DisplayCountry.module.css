@@ -1,0 +1,37 @@
+.main_wrapper {
+  box-shadow: rgba(0, 0, 0, 0.2) 0px 2px 1px -1px,
+    rgba(0, 0, 0, 0.14) 0px 1px 1px 0px, rgba(0, 0, 0, 0.12) 0px 1px 3px 0px;
+  margin: 0 20px;
+  padding: 20px;
+  margin-top: 20px;
+}
+.country_name {
+  font-size: 2.125rem;
+}
+.country_flag {
+  margin-left: 10px;
+}
+
+.country_info_cont {
+  display: flex;
+  flex-flow: wrap;
+  flex-wrap: wrap;
+  gap: 100px;
+  margin-top: 20px;
+}
+
+.list {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+.list li {
+  color: black;
+  font-weight: bold;
+}
+
+.value {
+  font-weight: normal;
+  margin: 0 10px;
+}
