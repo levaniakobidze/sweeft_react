@@ -86,7 +86,6 @@ const SelectCountry = () => {
     navigator.geolocation.getCurrentPosition(
       (position) => {
         const { latitude, longitude } = position.coords;
-        console.log(latitude);
         setLocation({ latitude, longitude });
       },
       (error) => {

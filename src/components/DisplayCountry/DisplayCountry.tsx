@@ -44,7 +44,7 @@ const DisplayCountry = () => {
             </li>
             <li>
               <span className={classes.key}>Borders:</span>
-              {country?.borders.map((bordCountry, index: number) => {
+              {country?.borders?.map((bordCountry, index: number) => {
                 return (
                   <span className={classes.value} key={index}>
                     {bordCountry}
