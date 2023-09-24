@@ -24,3 +24,16 @@
 .airports_search_input:focus {
   border-bottom: 1px solid rgb(0, 183, 255);
 }
+.airport_list {
+  display: flex;
+  flex-wrap: wrap;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.airport_list li {
+  flex: 1 0 50%;
+  box-sizing: border-box;
+  padding: 10px;
+}

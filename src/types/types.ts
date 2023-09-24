@@ -17,3 +17,9 @@ export interface LocationTypes {
   latitude: number;
   longitude: number;
 }
+
+export interface airportTypes {
+  iata: string;
+  name: string;
+  country: string;
+}
