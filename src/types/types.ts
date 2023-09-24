@@ -10,6 +10,7 @@ export interface countryDataTypes {
   borders: [string];
   continent: string;
   cca3: string;
+  cca2: string;
 }
 
 export interface LocationTypes {

@@ -1,0 +1,26 @@
+.airports_wrapper {
+  padding: 10px;
+  box-shadow: rgba(0, 0, 0, 0.2) 0px 2px 1px -1px,
+    rgba(0, 0, 0, 0.14) 0px 1px 1px 0px, rgba(0, 0, 0, 0.12) 0px 1px 3px 0px;
+}
+
+.airports_title {
+  margin: 10px 0;
+  font-weight: normal;
+}
+.airports_search_input {
+  width: 200px;
+  padding: 10px 0;
+  border: 0;
+  border-bottom: 1px solid black;
+  outline: none;
+  transition: all 0.1s;
+}
+
+.airports_search_input::placeholder {
+  color: gray;
+}
+
+.airports_search_input:focus {
+  border-bottom: 1px solid rgb(0, 183, 255);
+}

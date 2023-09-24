@@ -23,6 +23,7 @@ const SelectCountry = ({ code }: { code: string | undefined }) => {
         borders,
         continents,
         cca3,
+        cca2,
         currencies,
       } = resp.data[0];
       const currencyValues = Object.values(currencies) as {
@@ -45,6 +46,7 @@ const SelectCountry = ({ code }: { code: string | undefined }) => {
 
         continent: continents[0],
         cca3: cca3,
+        cca2: cca2,
       });
     } catch (error) {
       console.log(error);
