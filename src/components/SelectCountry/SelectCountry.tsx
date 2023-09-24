@@ -21,10 +21,14 @@ const SelectCountry = ({ code }: { code: string | undefined }) => {
         subregion,
         population,
         borders,
-        currencies,
         continents,
         cca3,
+        currencies,
       } = resp.data[0];
+      const currencyValues = Object.values(currencies) as {
+        name: string;
+        symbol: string;
+      }[];
       setCountry({
         name: resp.data[0].name,
         flag: flag,
@@ -33,7 +37,12 @@ const SelectCountry = ({ code }: { code: string | undefined }) => {
         subRegion: subregion,
         population: population,
         borders: borders,
-        currencies: currencies,
+        currencyCode: Object.keys(currencies)[0],
+        currencies: {
+          name: currencyValues[0]?.name,
+          symbol: currencyValues[0]?.symbol,
+        },
+
         continent: continents[0],
         cca3: cca3,
       });

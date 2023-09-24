@@ -6,6 +6,7 @@ export interface countryDataTypes {
   region: string;
   subRegion: string;
   currencies: { name: string; symbol: string };
+  currencyCode: string;
   borders: [string];
   continent: string;
   cca3: string;
