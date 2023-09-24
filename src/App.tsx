@@ -1,21 +1,23 @@
 import { Fragment, useContext, useEffect } from "react";
 import "./App.css";
-import { Routes, Route, useNavigate } from "react-router-dom";
+import { Routes, Route } from "react-router-dom";
 import Home from "./pages/Home/Home";
 import { ContextTypes, MainContext } from "./context/mainContext";
 import axios from "axios";
 import { getGeoLocation } from "./utils/geoLocation";
 import { getLocation } from "./utils/location";
+import Airports from "./pages/Airports/Airports";
 const App = () => {
   const { setLocation, location } = useContext(MainContext) as ContextTypes;
-  const navigate = useNavigate();
+  // const navigate = useNavigate();
 
   const getCountryByName = async (name: string) => {
     try {
       const resp = await axios.get(
         `https://restcountries.com/v3.1/name/${name}`
       );
-      navigate(resp.data[0].cca3);
+      console.log(resp);
+      // navigate(resp.data[0].cca3);
     } catch (error) {
       console.log(error);
     }
@@ -36,6 +38,7 @@ const App = () => {
     <Fragment>
       <Routes>
         <Route path="/:code" element={<Home />} />
+        <Route path="/:code/airports" element={<Airports />} />
       </Routes>
     </Fragment>
   );

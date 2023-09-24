@@ -1,0 +1,19 @@
+.navigation_wrapper {
+  display: flex;
+  /* gap: 10px; */
+  margin-top: 20px;
+}
+.navigation_btn {
+  padding: 10px;
+  border: 0;
+  outline: 0;
+  font-size: 18px;
+  background-color: white;
+  text-decoration: none;
+  color: gray;
+}
+
+.btn_active {
+  border-bottom: 2px solid rgb(1, 173, 173);
+  color: rgb(1, 173, 173);
+}
