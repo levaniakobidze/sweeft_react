@@ -4,6 +4,7 @@ import { useParams } from "react-router-dom";
 import DisplayCountry from "../../components/DisplayCountry/DisplayCountry";
 import SelectCountry from "../../components/SelectCountry/SelectCountry";
 import Navigation from "../../components/Navigation/Navigation";
+import CurrencyExchange from "../../components/CurrencyExchange/CurrencyExchange";
 
 const Home = () => {
   const { code } = useParams();
@@ -12,7 +13,7 @@ const Home = () => {
       <SelectCountry code={code} />
       <DisplayCountry />
       <Navigation />
-      Home
+      <CurrencyExchange />
     </div>
   );
 };
