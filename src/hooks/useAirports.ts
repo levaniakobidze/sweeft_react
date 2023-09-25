@@ -7,6 +7,7 @@ import { airportTypes, countryDataTypes } from "../types/types";
 const useAirports = (country: countryDataTypes | null) => {
   const [airports, setAirports] = useState([]);
   const [loading, setLoading] = useState(false);
+
   const headers = {
     "X-Api-Key": "3ybGY/TW05G1ToDiHGcbNg==2VTn1GqIHfNY5DzJ",
   };
@@ -21,6 +22,7 @@ const useAirports = (country: countryDataTypes | null) => {
       const filtered = resp.data.filter(
         (airport: airportTypes) => airport.iata !== ""
       );
+
       setAirports(filtered);
     } catch (error) {
       console.log(error);

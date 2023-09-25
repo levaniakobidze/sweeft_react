@@ -25,9 +25,7 @@ const AirportsComponent = () => {
   useEffect(() => {
     getAirports();
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [country]);
-
-  console.log(airports);
+  }, []);
 
   return (
     <div className={classes.airports_wrapper}>
