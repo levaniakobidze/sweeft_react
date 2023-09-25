@@ -15,7 +15,7 @@
   display: flex;
   flex-flow: wrap;
   flex-wrap: wrap;
-  gap: 100px;
+  gap: 200px;
   margin-top: 20px;
 }
 
@@ -34,4 +34,10 @@
   font-weight: normal;
   margin: 0 10px;
   font-size: 15px;
+}
+
+@media screen and (max-width: 768px) {
+  .country_info_cont {
+    gap: 20px;
+  }
 }
