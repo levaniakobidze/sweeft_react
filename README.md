@@ -1,8 +1,5 @@
 # Sweeft React.js Acceleration Program Project
 
-![GitHub last commit](https://img.shields.io/github/last-commit/levaniakobidze/sweeft-react-program)
-![GitHub license](https://img.shields.io/github/license/levaniakobidze/sweeft-react-program)
-
 This project, developed by Levan Iakobidze as part of the Sweeft React.js Acceleration Program, aims to provide users with a seamless experience for accessing essential information about different countries.
 
 ## Features
