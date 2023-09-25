@@ -1,55 +1,15 @@
-import axios from "axios";
-import { useContext, useEffect, useState } from "react";
+import { useContext, useEffect } from "react";
 import classes from "./AirportsComponent.module.css";
 import { ContextTypes, MainContext } from "../../context/mainContext";
 import { airportTypes } from "../../types/types";
 import Loading from "../Loading/Loading";
+import useAirports from "../../hooks/useAirports";
 
 const AirportsComponent = () => {
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  const [airports, setAirports] = useState([]);
   const { country } = useContext(MainContext) as ContextTypes;
-  const [loading, setLoading] = useState(false);
+  const { airports, loading, getAirports, getAirportsByName } =
+    useAirports(country);
   let timer: number | undefined;
-  const headers = {
-    "X-Api-Key": "3ybGY/TW05G1ToDiHGcbNg==2VTn1GqIHfNY5DzJ",
-  };
-  const getAirports = async () => {
-    setLoading(true);
-    try {
-      const resp = await axios.get(
-        `https://api.api-ninjas.com/v1/airports?country=${country?.cca2}`,
-        {
-          headers,
-        }
-      );
-      setAirports(resp.data);
-      setLoading(false);
-    } catch (error) {
-      setLoading(false);
-      console.log(error);
-    }
-  };
-  const getAirportsByName = async (searchTerm: string) => {
-    setLoading(true);
-    try {
-      const resp = await axios.get(
-        `https://api.api-ninjas.com/v1/airports?country=${country?.cca2}&name=${searchTerm}`,
-        {
-          headers,
-        }
-      );
-      setAirports(resp.data);
-      setLoading(false);
-    } catch (error) {
-      console.log(error);
-      setLoading(false);
-    }
-  };
-
-  useEffect(() => {
-    getAirports();
-  }, [country]);
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const search = e.target.value;
@@ -62,6 +22,10 @@ const AirportsComponent = () => {
       }
     }, 500);
   };
+  useEffect(() => {
+    getAirports();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [country]);
 
   return (
     <div className={classes.airports_wrapper}>

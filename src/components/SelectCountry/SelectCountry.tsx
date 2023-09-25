@@ -58,6 +58,7 @@ const SelectCountry = ({ code }: { code: string | undefined }) => {
 
   useEffect(() => {
     getCountry();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [code]);
 
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
