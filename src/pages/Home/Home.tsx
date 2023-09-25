@@ -9,7 +9,7 @@ import CurrencyExchange from "../../components/CurrencyExchange/CurrencyExchange
 const Home = () => {
   const { code } = useParams();
   return (
-    <div>
+    <div className="container">
       <SelectCountry code={code} />
       <DisplayCountry />
       <Navigation />

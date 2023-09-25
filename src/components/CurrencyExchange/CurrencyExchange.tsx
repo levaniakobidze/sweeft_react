@@ -4,12 +4,13 @@ import Select from "react-select";
 import { ContextTypes, MainContext } from "../../context/mainContext";
 import { countryDataTypes } from "../../types/types";
 import axios from "axios";
+import { customExchangeStyles } from "../../styles/selectStyles";
 
 const CurrencyExchange = () => {
   const { allCountries, country } = useContext(MainContext) as ContextTypes;
   const [selectedCountry, setSelectedCountry] = useState(null);
   const [exchangeRate, setExchangeRate] = useState(0);
-  const [calculated, setCalculated] = useState(0);
+  const [calculated, setCalculated] = useState<number | string>("");
   const [currencySymbol, setCurrencySymbol] = useState<string | undefined>("");
 
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -45,12 +46,16 @@ const CurrencyExchange = () => {
     const code = country?.currencyCode;
     fetchExchangeRate(code);
     setCurrencySymbol(country?.currencies?.symbol);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [country]);
 
   useEffect(() => {
     fetchExchangeRate(selectedCountry);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [selectedCountry]);
 
+  const rate = 1 / exchangeRate;
+  const str = rate.toFixed(2).toString();
   return (
     <div className={classes.currency_wrapper}>
       <h1 className={classes.currency_title}>Currency Exchange</h1>
@@ -65,6 +70,16 @@ const CurrencyExchange = () => {
               symbol: Object.values(currencies)[0],
             };
           })}
+          theme={(theme) => ({
+            ...theme,
+            borderRadius: 0,
+            colors: {
+              ...theme.colors,
+              primary25: "hotpink",
+              primary: "white   ",
+            },
+          })}
+          styles={customExchangeStyles}
           defaultValue={{
             name: country?.name.common,
             label: country?.name.common,
@@ -73,7 +88,7 @@ const CurrencyExchange = () => {
         />
       )}
       <div className={classes.currency_inputs_container}>
-        <div>
+        <div className={classes.currency_inner_cont}>
           <span>{country?.currencies?.symbol}</span>
           <input
             onChange={calculateRate}
@@ -83,13 +98,13 @@ const CurrencyExchange = () => {
           />
         </div>
         =
-        <div>
+        <div className={classes.currency_inner_cont}>
           <span>{currencySymbol}</span>
           <input
             className={classes.display_input}
             type="number"
             disabled
-            placeholder="0.00"
+            placeholder={str}
             value={calculated}
           />
         </div>

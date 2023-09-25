@@ -3,16 +3,19 @@ import { useContext, useEffect, useState } from "react";
 import classes from "./AirportsComponent.module.css";
 import { ContextTypes, MainContext } from "../../context/mainContext";
 import { airportTypes } from "../../types/types";
+import Loading from "../Loading/Loading";
 
 const AirportsComponent = () => {
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const [airports, setAirports] = useState([]);
   const { country } = useContext(MainContext) as ContextTypes;
+  const [loading, setLoading] = useState(false);
   let timer: number | undefined;
   const headers = {
     "X-Api-Key": "3ybGY/TW05G1ToDiHGcbNg==2VTn1GqIHfNY5DzJ",
   };
   const getAirports = async () => {
+    setLoading(true);
     try {
       const resp = await axios.get(
         `https://api.api-ninjas.com/v1/airports?country=${country?.cca2}`,
@@ -21,11 +24,14 @@ const AirportsComponent = () => {
         }
       );
       setAirports(resp.data);
+      setLoading(false);
     } catch (error) {
+      setLoading(false);
       console.log(error);
     }
   };
   const getAirportsByName = async (searchTerm: string) => {
+    setLoading(true);
     try {
       const resp = await axios.get(
         `https://api.api-ninjas.com/v1/airports?country=${country?.cca2}&name=${searchTerm}`,
@@ -34,8 +40,10 @@ const AirportsComponent = () => {
         }
       );
       setAirports(resp.data);
+      setLoading(false);
     } catch (error) {
       console.log(error);
+      setLoading(false);
     }
   };
 
@@ -74,6 +82,7 @@ const AirportsComponent = () => {
             );
           }
         })}
+        {loading && <Loading />}
       </ul>
     </div>
   );

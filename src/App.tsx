@@ -1,5 +1,4 @@
 import { Fragment, useContext, useEffect } from "react";
-import "./App.css";
 import { Routes, Route, useNavigate, useLocation } from "react-router-dom";
 import Home from "./pages/Home/Home";
 import { ContextTypes, MainContext } from "./context/mainContext";

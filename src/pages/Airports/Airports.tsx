@@ -7,7 +7,7 @@ import AirportsComponent from "../../components/AirportsComponent/AirportsCompon
 const Airports = () => {
   const { code } = useParams();
   return (
-    <div>
+    <div className="container">
       <SelectCountry code={code} />
       <DisplayCountry />
       <Navigation />

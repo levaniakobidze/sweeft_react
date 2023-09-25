@@ -1,5 +1,24 @@
+@import url("https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700;900&display=swap");
+
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
+}
+body {
+  font-family: "Roboto", sans-serif;
+}
+.container {
+  max-width: 1200px;
+  border: 1px solid rgb(204, 204, 204);
+  padding: 30px;
+  margin: 20px auto;
+}
+
+.react-select__control:focus {
+  outline: none;
+}
+
+.react-select__menu-list .react-select__option:focus {
+  outline: none;
 }

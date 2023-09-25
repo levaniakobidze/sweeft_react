@@ -5,9 +5,12 @@ import { ContextTypes } from "../../context/mainContext";
 import axios from "axios";
 import { countryDataTypes } from "../../types/types";
 import { useNavigate } from "react-router-dom";
+import { customSelectCountryStyles } from "../../styles/selectStyles";
 
 const SelectCountry = ({ code }: { code: string | undefined }) => {
-  const { setCountry, allCountries } = useContext(MainContext) as ContextTypes;
+  const { country, setCountry, allCountries } = useContext(
+    MainContext
+  ) as ContextTypes;
   const navigate = useNavigate();
   const getCountry = async () => {
     try {
@@ -64,12 +67,19 @@ const SelectCountry = ({ code }: { code: string | undefined }) => {
 
   return (
     <div>
-      <Select
-        options={allCountries?.map((country: countryDataTypes) => {
-          return { name: country.cca3, label: country.name.common };
-        })}
-        onChange={handleSelectChange}
-      />
+      {country?.name && (
+        <Select
+          styles={customSelectCountryStyles}
+          options={allCountries?.map((country: countryDataTypes) => {
+            return { name: country.cca3, label: country.name.common };
+          })}
+          onChange={handleSelectChange}
+          defaultValue={{
+            name: country?.name.common,
+            label: country?.name.common,
+          }}
+        />
+      )}
     </div>
   );
 };

@@ -21,7 +21,7 @@ const DisplayCountry = () => {
             <li>
               <span className={classes.key}>currency:</span>
               <span className={classes.value}>
-                {country?.currencies?.name}({country?.currencies?.symbol})
+                {country?.currencies?.name} ({country?.currencies?.symbol})
               </span>
             </li>
             <li>
