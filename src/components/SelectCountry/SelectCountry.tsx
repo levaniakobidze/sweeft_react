@@ -1,70 +1,82 @@
-import { useEffect, useContext } from "react";
+import React, { useEffect, useContext } from "react";
 import Select from "react-select";
-import { MainContext } from "../../context/mainContext";
-import { ContextTypes } from "../../context/mainContext";
 import axios from "axios";
-import { countryDataTypes } from "../../types/types";
 import { useNavigate } from "react-router-dom";
+import { MainContext, ContextTypes } from "../../context/mainContext";
 import { customSelectCountryStyles } from "../../styles/selectStyles";
+import { countryDataTypes } from "../../types/types";
 
-const SelectCountry = ({ code }: { code: string | undefined }) => {
-  const { country, setCountry, allCountries } = useContext(
-    MainContext
-  ) as ContextTypes;
+interface SelectCountryProps {
+  code: string | undefined;
+}
+
+const SelectCountry: React.FC<SelectCountryProps> = ({ code }) => {
+  const {
+    country,
+    setCountry,
+    allCountries,
+    cashedCountries,
+    setCashedCountries,
+  } = useContext(MainContext) as ContextTypes;
   const navigate = useNavigate();
-  const getCountry = async () => {
-    try {
-      const resp = await axios.get(
-        `https://restcountries.com/v3.1/alpha/${code}`
-      );
-      const {
-        flag,
-        capital,
-        region,
-        subregion,
-        population,
-        borders,
-        continents,
-        cca3,
-        cca2,
-        currencies,
-      } = resp.data[0];
-      const currencyValues = Object.values(currencies) as {
-        name: string;
-        symbol: string;
-      }[];
-      setCountry({
-        name: resp.data[0].name,
-        flag: flag,
-        capital: capital[0],
-        region: region,
-        subRegion: subregion,
-        population: population,
-        borders: borders,
-        currencyCode: Object.keys(currencies)[0],
-        currencies: {
-          name: currencyValues[0]?.name,
-          symbol: currencyValues[0]?.symbol,
-        },
 
-        continent: continents[0],
-        cca3: cca3,
-        cca2: cca2,
-      });
-    } catch (error) {
-      console.log(error);
+  const getCountry = async () => {
+    const isCashed = cashedCountries?.find(
+      (cashedCountry: countryDataTypes) => {
+        return cashedCountry.cca3 === code;
+      }
+    );
+    if (!isCashed) {
+      try {
+        const response = await axios.get(
+          `https://restcountries.com/v3.1/alpha/${code}`
+        );
+        const countryData = response.data[0];
+        const currencies = countryData.currencies || {};
+        const currencyValues = Object.values(currencies) as {
+          name: string;
+          symbol: string;
+        }[];
+        const countryInfo = {
+          name: countryData.name,
+          flag: countryData.flag,
+          capital: countryData.capital[0],
+          region: countryData.region,
+          subRegion: countryData.subregion,
+          population: countryData.population,
+          borders: countryData.borders,
+          currencyCode: Object.keys(currencies)[0],
+          currencies: {
+            name: currencyValues[0]?.name,
+            symbol: currencyValues[0]?.symbol,
+          },
+          continent: countryData.continents[0],
+          cca3: countryData.cca3,
+          cca2: countryData.cca2,
+        };
+        setCountry(countryInfo);
+        setCashedCountries((prev) => [...(prev || []), countryInfo]);
+      } catch (error) {
+        console.error("Error fetching country:", error);
+      }
+    } else {
+      setCountry(isCashed);
     }
   };
 
   useEffect(() => {
-    getCountry();
+    if (code) {
+      getCountry();
+    }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [code]);
 
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  const handleSelectChange = (e: any) => {
-    navigate(`/${e.name}`);
+  const handleSelectChange = (selectedOption: any) => {
+    navigate(`/${selectedOption.name}`);
   };
+
+  // console.log(cashedCountries, "cashed");
 
   return (
     <div>

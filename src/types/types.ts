@@ -23,3 +23,8 @@ export interface airportTypes {
   name: string;
   country: string;
 }
+
+export interface cashedCountryTypes {
+  code: string;
+  info: countryDataTypes;
+}

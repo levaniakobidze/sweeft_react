@@ -14,9 +14,9 @@ const CurrencyExchange = () => {
   const [currencySymbol, setCurrencySymbol] = useState<string | undefined>("");
 
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  const handleSelectChange = (e: any) => {
-    setSelectedCountry(e.currency);
-    setCurrencySymbol(e.symbol.symbol);
+  const handleSelectChange = (selectedOption: any) => {
+    setSelectedCountry(selectedOption.currency);
+    setCurrencySymbol(selectedOption.symbol.symbol);
   };
 
   const fetchExchangeRate = async (code: string | null | undefined) => {
@@ -24,20 +24,17 @@ const CurrencyExchange = () => {
       const resp = await axios.get(
         `https://api.exchangerate.host/latest?base=${code}`
       );
-      // Get exchangeRate from the api response that matchs to the selected countryCode
       const currencyCode = country?.currencyCode;
-      const rate = currencyCode
-        ? resp.data.rates[country?.currencyCode]
-        : undefined;
+      const rate = currencyCode ? resp.data.rates[currencyCode] : undefined;
       setExchangeRate(rate);
     } catch (error) {
-      console.log(error);
+      console.error("Error fetching exchange rate:", error);
     }
   };
-
-  const calculateRate = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const input = e.target.value;
-    const calculated = Number(input) / exchangeRate;
+  // Function calculates exchange rate on every input change
+  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const inputValue = e.target.value;
+    const calculated = Number(inputValue) / exchangeRate;
     const fixed = calculated.toFixed(2);
     setCalculated(Number(fixed));
   };
@@ -56,6 +53,7 @@ const CurrencyExchange = () => {
 
   const rate = 1 / exchangeRate;
   const str = rate.toFixed(2).toString();
+
   return (
     <div className={classes.currency_wrapper}>
       <h1 className={classes.currency_title}>Currency Exchange</h1>
@@ -91,7 +89,7 @@ const CurrencyExchange = () => {
         <div className={classes.currency_inner_cont}>
           <span>{country?.currencies?.symbol}</span>
           <input
-            onChange={calculateRate}
+            onChange={handleInputChange}
             className={classes.prompt_input}
             type="number"
             placeholder="0"
