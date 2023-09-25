@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import axios from "axios";
-import { countryDataTypes } from "../types/types";
+import { airportTypes, countryDataTypes } from "../types/types";
 
 const useAirports = (country: countryDataTypes | null) => {
   const [airports, setAirports] = useState([]);
@@ -18,7 +18,10 @@ const useAirports = (country: countryDataTypes | null) => {
         `https://api.api-ninjas.com/v1/airports?country=${country?.cca2}`,
         { headers }
       );
-      setAirports(resp.data);
+      const filtered = resp.data.filter(
+        (airport: airportTypes) => airport.iata !== ""
+      );
+      setAirports(filtered);
     } catch (error) {
       console.log(error);
     } finally {

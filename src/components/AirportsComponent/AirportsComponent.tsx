@@ -27,6 +27,8 @@ const AirportsComponent = () => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [country]);
 
+  console.log(airports);
+
   return (
     <div className={classes.airports_wrapper}>
       <h1 className={classes.airports_title}>Airports</h1>
@@ -36,6 +38,9 @@ const AirportsComponent = () => {
         placeholder="Search for airports"
         onChange={handleChange}
       />
+      {!loading && airports.length === 0 && (
+        <p className={classes.error}>No airports found!😟</p>
+      )}
       <ul className={classes.airport_list}>
         {airports?.map((airport: airportTypes, index) => {
           if (airport.iata) {
