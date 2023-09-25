@@ -1,27 +1,40 @@
-# React + TypeScript + Vite
+# Sweeft React.js Acceleration Program Project
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+![GitHub last commit](https://img.shields.io/github/last-commit/levaniakobidze/sweeft-react-program)
+![GitHub license](https://img.shields.io/github/license/levaniakobidze/sweeft-react-program)
 
-Currently, two official plugins are available:
+This project, developed by Levan Iakobidze as part of the Sweeft React.js Acceleration Program, aims to provide users with a seamless experience for accessing essential information about different countries.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## Features
 
-## Expanding the ESLint configuration
+### 1. Choose Country
 
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
+🌍 Users are presented with a comprehensive list of all possible countries, sourced from the Countries API. They can effortlessly select their desired country from this list.
 
-- Configure the top-level `parserOptions` property like this:
+### 2. Automatic Location Detection
 
-```js
-   parserOptions: {
-    ecmaVersion: 'latest',
-    sourceType: 'module',
-    project: ['./tsconfig.json', './tsconfig.node.json'],
-    tsconfigRootDir: __dirname,
-   },
-```
+📍 The application intelligently determines the user's location upon the initial page load, utilizing latitude and longitude data. To achieve this, the application will request location permissions from the user.
 
-- Replace `plugin:@typescript-eslint/recommended` to `plugin:@typescript-eslint/recommended-type-checked` or `plugin:@typescript-eslint/strict-type-checked`
-- Optionally add `plugin:@typescript-eslint/stylistic-type-checked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and add `plugin:react/recommended` & `plugin:react/jsx-runtime` to the `extends` list
+### 3. Currency Exchange
+
+💱 Upon selecting a country, users have access to two main pages:
+
+a. **Currency Exchange**
+
+- Users can specify the destination country (where they intend to exchange currency).
+- They can input the amount of money they wish to convert, and the application will instantly provide the equivalent value in the chosen currency.
+
+b. **Airport Information**
+
+- Users can explore a list of airports within the selected country.
+- A search functionality allows users to quickly find specific airports in the country.
+
+## Installation and Setup
+
+1. **Clone the Repository**
+   ```bash
+   git clone https://github.com/levaniakobidze/sweeft-react-program.git
+   cd sweeft-react-program
+   npm install
+   npm start
+   ```
